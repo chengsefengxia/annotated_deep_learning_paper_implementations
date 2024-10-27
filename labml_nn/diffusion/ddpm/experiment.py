@@ -167,6 +167,7 @@ class CelebADataset(torch.utils.data.Dataset):
     ### CelebA HQ dataset
     """
     print("Celeb文件执行")
+    print("切换分支")
     def __init__(self, image_size: int):
         super().__init__()
 
