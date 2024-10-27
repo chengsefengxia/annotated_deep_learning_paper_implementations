@@ -38,6 +38,7 @@ class Configs(BaseConfigs):
     # Device to train the model on.
     # [`DeviceConfigs`](https://docs.labml.ai/api/helpers.html#labml_helpers.device.DeviceConfigs)
     #  picks up an available CUDA device or defaults to CPU.
+    print("config配置文件开始")
     device: torch.device = DeviceConfigs()
 
     # U-Net model for $\textcolor{lightgreen}{\epsilon_\theta}(x_t, t)$
@@ -78,6 +79,7 @@ class Configs(BaseConfigs):
     optimizer: torch.optim.Adam
 
     def init(self):
+        print("初始化文件执行")
         # Create $\textcolor{lightgreen}{\epsilon_\theta}(x_t, t)$ model
         self.eps_model = UNet(
             image_channels=self.image_channels,
@@ -105,6 +107,7 @@ class Configs(BaseConfigs):
         """
         ### Sample images
         """
+        print("采样文件执行")
         with torch.no_grad():
             # $x_T \sim p(x_T) = \mathcal{N}(x_T; \mathbf{0}, \mathbf{I})$
             x = torch.randn([self.n_samples, self.image_channels, self.image_size, self.image_size],
@@ -124,6 +127,7 @@ class Configs(BaseConfigs):
         """
         ### Train
         """
+        print("train开始")
 
         # Iterate through the dataset
         for data in monit.iterate('Train', self.data_loader):
@@ -162,7 +166,7 @@ class CelebADataset(torch.utils.data.Dataset):
     """
     ### CelebA HQ dataset
     """
-
+    print("Celeb文件执行")
     def __init__(self, image_size: int):
         super().__init__()
 
